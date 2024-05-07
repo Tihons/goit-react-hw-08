@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hook/useAuth';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Lauout';
 import { RestrictedRoute } from './RestrictedRoute';
