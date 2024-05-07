@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hook/useAuth';
 import { logOut } from '../../redux/auth/operations';
 import css from './UserMenu.module.css';
 

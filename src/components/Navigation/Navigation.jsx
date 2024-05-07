@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hook/useAuth';
 import css from './Navigation.module.css';
 import clsx from 'clsx';
 
