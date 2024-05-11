@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../hook/useAuth';
+
 import css from './Navigation.module.css';
 import clsx from 'clsx';
 
@@ -8,7 +8,7 @@ const buildLinkClass = ({ isActive }) => {
 };
 
 export const Navigation = () => {
-  const { isLoggedIn } = useAuth();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <nav>

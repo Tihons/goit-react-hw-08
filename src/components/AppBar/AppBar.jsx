@@ -1,11 +1,11 @@
-import { useAuth } from '../../hook/useAuth';
+
 import { AuthNav } from '../AuthNav/AuthNav';
 import { Navigation } from '../Navigation/Navigation';
 import { UserMenu } from '../UserMenu/UserMenu';
 import css from './AppBar.module.css';
 
 export const AppBar = () => {
-  const { isLoggedIn } = useAuth();
+  const  isLoggedIn  = useSelector(selectIsSignedIn);
 
   return (
     <header className={css.header}>
@@ -14,3 +14,4 @@ export const AppBar = () => {
     </header>
   );
 };
+export default AppBar;
