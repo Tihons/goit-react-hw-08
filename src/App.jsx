@@ -12,15 +12,15 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const LoginPage = lazy(() => import('./pages/LogInPage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 
-export const App = () => {
-  const dispatch = useDispatch();
+export const isRefreshing = () => {
+  const isRefreshing = useDispatch();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
 
-  return dispatch ? (
+  return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
     <>
