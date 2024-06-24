@@ -1,57 +1,65 @@
-import * as Yup from 'yup';
-import css from './ContactForm.module.css';
-import { useId } from 'react';
-import { CiUser } from 'react-icons/ci';
-import { CiPhone } from 'react-icons/ci';
-import { useDispatch } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addContacts } from '../../redux/contacts/operations';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useId } from "react";
+import css from "./ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contacts/operations";
 
-const contactSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too Short!').max(50, 'Too Long!').required('This field is required.'),
-  number: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('This field is required.'),
-});
+const ContactForm = () => {
+  const FormValidationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    number: Yup.string()
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+  });
 
-export default function ContactForm() {
-  const lableName = useId();
-  const lableNumber = useId();
+  const initialValues = {
+    name: "",
+    number: "",
+  };
+
+  const nameFieldId = useId();
+  const numberFieldId = useId();
+
   const dispatch = useDispatch();
+
+  const handleSubmit = (e, actions) => {
+    dispatch(addContact(e));
+    actions.resetForm();
+  };
 
   return (
     <Formik
-      initialValues={{ name: '', number: '' }}
-      validationSchema={contactSchema}
-      onSubmit={(value, actions) => {
-        dispatch(addContacts(value));
-        actions.resetForm();
-      }}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={FormValidationSchema}
     >
-      <Form className={css.formicForm}>
-        <label htmlFor={lableName} className={css.labelForm}>
-          <CiUser />
-          Name:
-        </label>
-        <div className={css.inputBox}>
-          <Field type="text" id={lableName} name="name" />
-          <ErrorMessage name="name" component="span" />
+      <Form className={css.formBox}>
+        <div className={css.inputForm}>
+          <label className={css.labelText} htmlFor={nameFieldId}>
+            Username
+          </label>
+          <Field type="text" name="name" id={nameFieldId} />
+          <ErrorMessage name="name" as="span" />
+        </div>
+        <div className={css.inputForm}>
+          <label className={css.labelText} htmlFor={numberFieldId}>
+            Number
+          </label>
+          <Field type="text" name="number" id={numberFieldId} />
+          <ErrorMessage name="number" as="span" />
         </div>
 
-        <label htmlFor={lableNumber} className={css.labelForm}>
-          <CiPhone />
-          Number:
-        </label>
-        <div className={css.inputBox}>
-          <Field type="number" id={lableNumber} name="number" />
-          <ErrorMessage name="number" component="span" />
-        </div>
-
-        <button type="submit" className={css.btnForm}>
+        <button className={css.btn} type="submit">
           Add contact
         </button>
       </Form>
     </Formik>
   );
-}
+};
+
+export default ContactForm;

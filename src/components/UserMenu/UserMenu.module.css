@@ -1,17 +1,20 @@
-.wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .wrapper > p {
-    padding: 10px;
-    font-size: 20px;
-    color: #212121;
-  }
-  .wrapper span {
-    color: #e84a5f;
-  }
-  .wrapper > button {
-    padding: 10px;
-    font-size: 20px;
-  }
+.container {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  font-size: 25px;
+  margin-top: 25px;
+  font-weight: 600;
+}
+
+.btn {
+  width: 100px;
+}
+
+.btn:hover {
+  color: red;
+}

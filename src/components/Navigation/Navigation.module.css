@@ -1,8 +1,9 @@
 .link {
-    padding: 10px;
-    font-size: 20px;
-    color: #212121;
-  }
-  .active {
-    color: #e84a5f;
-  }
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
+
+.link:hover {
+  color: red;
+}

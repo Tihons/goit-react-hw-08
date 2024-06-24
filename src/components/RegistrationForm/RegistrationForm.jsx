@@ -2,11 +2,15 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
-import css from "./LoginForm.module.css";
+import { register } from "../../redux/auth/operations";
+import css from "./RegistrationForm.module.css";
 
-const LoginForm = () => {
+const RegistrationForm = () => {
   const FormValidationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, "Too Short!")
+      .max(30, "Too Long!")
+      .required("Required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
@@ -17,10 +21,12 @@ const LoginForm = () => {
   });
 
   const initialValues = {
+    name: "",
     email: "",
     password: "",
   };
 
+  const nameFieldId = useId();
   const emailFieldId = useId();
   const passwordFieldId = useId();
 
@@ -29,14 +35,7 @@ const LoginForm = () => {
   const handleSubmit = (e, actions) => {
     // const form = e.currentTarget;
 
-    dispatch(logIn(e))
-      .unwrap()
-      .then(() => {
-        console.log("login success");
-      })
-      .catch(() => {
-        console.log("login error");
-      });
+    dispatch(register(e));
 
     actions.resetForm();
   };
@@ -49,6 +48,10 @@ const LoginForm = () => {
     >
       <Form className={css.formBox}>
         <div className={css.inputForm}>
+          <label htmlFor={nameFieldId}>Username </label>
+          <Field type="name" name="name" id={emailFieldId} />
+          <ErrorMessage name="name" as="span" />
+
           <label htmlFor={emailFieldId}>Email </label>
           <Field type="email" name="email" id={emailFieldId} />
           <ErrorMessage name="email" as="span" />
@@ -65,4 +68,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;
