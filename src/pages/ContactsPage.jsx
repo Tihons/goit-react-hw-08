@@ -1,33 +1,29 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectLoading } from '../redux/contacts/selectors';
-import { fetchContacts } from '../redux/contacts/operations';
-import ContactForm from '../components/ContactForm/ContactForm';
-import SearchBox from '../components/SearchBox/SearchBox';
-import ContactList from '../components/ContactList/ContactList';
-import css from './PagesStyles.module.css';
-import DocumentTitle from '../components/DocumentTitle';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Title from "../components/Title/Title";
+import { selectIsLoading, selectError } from "../redux/contacts/selectors";
+import { fetchContacts } from "../redux/contacts/operations";
+import ContactForm from "../components/ContactForm/ContactForm";
+import ContactList from "../components/ContactList/ContactList";
+import SearchBox from "../components/SearchBox/SearchBox";
 
 export default function ContactsPage() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   return (
     <>
-      <DocumentTitle>Contacts</DocumentTitle>
+      <Title>Your contacts</Title>
       <ContactForm />
       <SearchBox />
-      <div>
-        {isLoading ? (
-          <div className={css.information}>
-            <b>Request in progress...</b>
-          </div>
-        ) : (
-          <ContactList />
-        )}
-      </div>
+      {isLoading && !error && <b>Loading...</b>}
+      {error && <b>Something went wrong.</b>}
+      <ContactList />
     </>
   );
 }

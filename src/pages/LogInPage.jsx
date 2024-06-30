@@ -1,12 +1,11 @@
-import DocumentTitle from '../components/DocumentTitle';
-import { LogInForm } from '../components/LogInForm/LogInForm';
+import Title from "../components/Title/Title";
+import LoginForm from "../components/LoginForm/LoginForm";
 
-export default function LogInPage() {
+export default function LoginPage() {
   return (
     <div>
-      <DocumentTitle>Login</DocumentTitle>
-
-      <LogInForm />
+      <Title>Login</Title>
+      <LoginForm />
     </div>
   );
 }

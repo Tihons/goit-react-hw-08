@@ -1,14 +1,17 @@
-import DocumentTitle from '../components/DocumentTitle';
-import css from './PagesStyles.module.css';
+import Title from "../components/Title/Title";
 
 export default function HomePage() {
   return (
     <>
-      <DocumentTitle>Home</DocumentTitle>
+      <Title>PHONEBOOK</Title>
 
-      <div className={css.profileBox}>
-        <h1>My profile:</h1>
-        <p>It`s still empty here, but it will be fixed in time 😉</p>
+      <div>
+        <h1>
+          Welcome to our app{" "}
+          <span role="img" aria-label="Greeting icon">
+            💁
+          </span>
+        </h1>
       </div>
     </>
   );
